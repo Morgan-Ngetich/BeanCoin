@@ -1,29 +1,20 @@
-import { useState } from 'react';
-import { land_backend } from 'declarations/land_backend';
+import Navbar from './components/Navbar'
+import LandingPage from './components/LandingPage'
+import About from "./components/About"
+import Footer from './components/Footer';
+import VideoGallery from './components/VideoGallery';
+import SocialLinks from './components/Socials'
 
 function App() {
-  const [greeting, setGreeting] = useState('');
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    const name = event.target.elements.name.value;
-    land_backend.greet(name).then((greeting) => {
-      setGreeting(greeting);
-    });
-    return false;
-  }
 
   return (
     <main>
-      <img src="/logo2.svg" alt="DFINITY logo" />
-      <br />
-      <br />
-      <form action="#" onSubmit={handleSubmit}>
-        <label htmlFor="name">Enter your name: &nbsp;</label>
-        <input id="name" alt="Name" type="text" />
-        <button type="submit">Click Me!</button>
-      </form>
-      <section id="greeting">{greeting}</section>
+      <Navbar />
+      <LandingPage />
+      <About />      
+      <VideoGallery />
+      <SocialLinks />
+      <Footer />
     </main>
   );
 }

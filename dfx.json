@@ -40,6 +40,14 @@
       "packtool": ""
     }
   },
+  "networks": {
+    "ic": {
+      "providers": [
+        "https://mainnet.dfinity.network"
+      ],
+      "type": "ephemeral"
+    }
+  },
   "output_env_file": ".env",
   "version": 1
 }

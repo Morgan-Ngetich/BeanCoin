@@ -3,8 +3,17 @@
     "@dfinity/agent": "^0.15.7",
     "@dfinity/candid": "^0.15.7",
     "@dfinity/principal": "^0.15.7",
+    "@react-three/drei": "^8.0.0",
+    "@react-three/fiber": "^8.0.0",
+    "bootstrap": "^5.3.3",
+    "chart.js": "^4.4.3",
+    "chartjs-plugin-datalabels": "^2.2.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-bootstrap": "^2.10.2",
+    "react-chartjs-2": "^5.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^5.2.1",
+    "react-multi-carousel": "^2.8.5"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",

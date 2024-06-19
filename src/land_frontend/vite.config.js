@@ -43,6 +43,10 @@ export default defineConfig({
           new URL("../declarations", import.meta.url)
         ),
       },
+      {
+        find: 'chart.js',
+        replacement: 'chart.js/auto',
+      },
     ],
   },
 });
