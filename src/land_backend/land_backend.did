@@ -1,3 +1,8 @@
 service : {
-    "greet": (text) -> (text) query;
+    
+    "transfer": (from: principal, to: principal, amount: nat) -> (unit) query;
+   
+    "balance_of": (owner: principal) -> (nat) query;
+    
+    "get_ledger": () -> (vec { "from": principal, "to": principal, "amount": nat, "timestamp": nat }) query;
 }

@@ -5,7 +5,7 @@ body {
   user-zoom: fixed;
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* Prevent horizontal overflow */
+  // overflow: hidden; /* Prevent horizontal overflow */
   width: 100%;
   box-sizing: border-box;
   }
@@ -321,358 +321,7 @@ body {
   .bottom-box {
     display: none;
   }
-
-
-
-  // // ABOUT
-
-  // .card {
-  //   display: flex;
-  //   flex-direction: column;
-  //   width: 80%;
-  //   background-color: #805a42;
-  //   margin: 0 auto; /* Center the div horizontally */
-  //   margin-top: 100px;
-  //   box-shadow: 2px 2px 2px #F7E1BC;
-  // }
-  // .about .carder {
-  //   flex-direction: column; /* Stack columns vertically */
-  // }
-
-  // .image-container {
-  //   margin-bottom: 1rem; /* Add space below the image */
-  // }
-
-  // .image-head {
-  //   width: 100%; /* Ensure the image is responsive */
-  //   height: auto; /* Maintain aspect ratio */
-  // }
-
-  // .content-container {
-  //   padding: 1rem; /* Adjust padding for smaller screens */
-  // }
-
-  // .header {
-  //   font-size: 1.5rem; /* Adjust font size for smaller screens */
-  //   text-align: center; /* Center align the header text */
-  // }
-
-  // .text {
-  //   font-size: 1rem; /* Adjust font size for smaller screens */
-  //   text-align: justify; /* Justify text for better readability */
-  // }
-
-  // .about-container {
-  //   margin: 1rem 0; /* Adjust margin for better spacing */
-  // }
-
-  // .about-vision, .about-mission {
-  //   margin-bottom: 1rem; /* Add space between vision and mission sections */
-  // }
-
-  // .about-vision .card-title, .about-mission .card-title {
-  //   font-size: 1.25rem; /* Adjust font size for smaller screens */
-  // }
-
-  // .about-vision .card-text, .about-mission .card-text {
-  //   font-size: 1rem; /* Adjust font size for smaller screens */
-  // }
-
-  // .men-content {
-  //   flex-direction: column; /* Stack men content vertically */
-  //   align-items: center; /* Center align the items */
-  // }
-
-  // .men-section {
-  //   margin: 1rem 0; /* Add space around the men image */
-  // }
-
-  // .side {
-  //   text-align: center; /* Center align the text */
-  //   margin: 1rem 0; /* Add space between text sections */
-  // }
-
-  // .side p {
-  //   font-size: 1rem; /* Adjust font size for smaller screens */
-  // }
-
-  // .men {
-  //   width: 100%; /* Ensure the men image is responsive */
-  //   height: auto; /* Maintain aspect ratio */
-  // }
-
-
-
 }
-
-
-//   .about {
-//     height: 50%;
-//   }
-  
-//   .card {
-//     display: flex;
-//     flex-direction: row;
-//     width: 80%;
-//     // height: 600px;
-//     background-color: #805a42;
-//     margin: 100px auto 0 ; /* Center the div horizontally */
-//     // margin-top: 100px;
-//     box-shadow: 2px 2px 2px #F7E1BC;
-//   }
-  
-//   .carder {
-//     height: 400px;
-//   }
-  
-//   .image-container {
-//   flex: 1;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   position: relative;
-//   }
-  
-
-// .image-head {    
-//     max-width: 400px;
-//     height: auto;
-//     position: relative;
-// }
- 
-  
-//   // @media (max-width: 600px) {
-//   // .image-head {
-//   // // max-width: 200px;
-//   // }
-//   // .landing-page {
-//   // margin-top: 50px;
-//   // background-color: rgba(0, 0, 0, 0.3);
-//   // }
-  
-//   // .image-right {
-  
-//   // }
-  
-//   // .carder {
-//   // margin-top: -200px;
-//   // width: 100%
-//   // }
-  
-//   // .carder p {
-//   // font-size: 0.7em;
-//   // }
-//   // }
-  
-//   .content-container {
-//   flex: 1;
-//   padding: 20px;
-//   }
-  
-//   .header {
-//   margin-top: 0;
-//   }
-  
-//   .text {
-//   font-size: 16px;
-//   line-height: 1.5;
-//   color: white;
-//   }
-  
-//   .about-container {
-//     display: flex;
-//     flex-direction: row;
-//     margin-top: 50px;
-//     z-index: -1;
-//     max-width: 70%
-//   }
-  
-//   .about-vision {
-//   max-width: 550px;
-//   background-image: url('./assets/coffeeEye.png');
-//   }
-  
-//   .about-mission {
-//   background-image: url('./assets/coffeeMission.png');
-//   max-width: 450px;
-//   }
-  
-//   .about-vision,
-//   .about-mission {
-//   color: white;
-//   position: relative;
-//   background-size: cover;
-//   background-position: center;
-//   padding: 20px;
-//   margin: 20px;
-//   border-radius: 30px;
-  
-//   }
-  
-//   .about-vision::after,
-//   .about-mission::after {
-//   content: "";
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   width: 100%;
-//   height: 100%;
-//   background-color: rgba(0, 0, 0, 0.6); /* Adjust the opacity (0.5) to your liking */
-//   border-radius: 30px;
-//   }
-  
-//   .about-vision .card-body,
-//   .about-mission .card-body {
-//   position: relative; 
-//   z-index: 1; 
-//   }
-  
-//   // @media (min-width: 768px) {
-//   // .about-container {
-//   // flex-direction: row;
-//   // }
-  
-//   // .about-vision {
-//   // order: 1;
-//   // margin-right: 20px;
-//   // }
-  
-//   // .about-mission {
-//   // order: 2;
-//   // margin-left: 20px;
-//   // }
-//   // }
-  
-//   // @media (max-width: 2000px){
-//   // .about-container {
-//   // max-width: 70%
-//   // }
-  
-//   // .about-vision {
-//   // max-width: 550px;
-//   // }
-//   // }
-  
-//   .men-content {
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   text-align: center;
-//   padding: 20px;
-//   color: #F8EDEB; 
-//   font-family: 'Georgia', serif; 
-//   }
-  
-//   .side {
-//   flex: 1;
-//   padding: 0 10px;
-//   }
-  
-//   .men-section {
-//   flex: 2;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   margin-top: 100px;
-//   }
-  
-//  .men {
-//   width: 100%;
-//   height: auto;
-//   }
-  
-//   .side {
-//   margin-top: 200px;
-//   }
-//   .side p {
-//   font-size: 1.5em; /* Adjusted font size for readability */
-//   margin: 20px 0;
-//   background: linear-gradient(135deg, #E0A872 0%, #F8E4BE 44%, #FFF3E0 55%, #E0A872 100%);
-//   -webkit-background-clip: text;
-//   -webkit-text-fill-color: transparent;
-//   position: relative;
-//   padding: 20px;
-//   }
-  
-//   .side p::before {
-//   content: "";
-//   display: block;
-//   height: 2px;
-//   width: 100%;
-//   background: linear-gradient(315deg, #E0A872 0%, #F8E4BE 44%, #FFF3E0 55%, #E0A872 100%);
-//   position: absolute;
-//   bottom: -5px; /* Adjust this value to move the underline up or down */
-//   left: 0;
-//   }
-  
-//   // @media (min-width: 769px) {
-//   // .side p {
-//   // font-size: 0.8rem;
-//   // // margin: 0;
-//   // padding: 14px;
-//   // }
-//   // }
-  
-//   // @media (max-width: 2000px) {
-//   // .side p {
-//   // font-size: 1.5em
-//   // }
-//   // }
-  
-//   /* For screens larger than 768px (desktops and larger tablets) /
-//   @media (max-width: 768px) {
-//   .men-content {
-//   padding: 20px; / Add padding to the content container */
-  
-  
-  
-//   .side {
-//   padding: 0 10px; /* Add padding to the sides /
-//   margin-top: 0; / Remove margin-top */
-//   }
-  
-//   // .right-side {
-//   // transform: rotate(3deg) ;
-//   // -webkit-transform: rotate(3deg) ;
-//   // -moz-transform: rotate(3deg) ;
-//   // -ms-transform: rotate(3deg) ;
-//   // -o-transform: rotate(3deg) ;
-//   // }
-  
-//   // .left-side {
-//   // transform: rotate(-3deg) ;
-//   // -webkit-transform: rotate(-3deg) ;
-//   // -moz-transform: rotate(-3deg) ;
-//   // -ms-transform: rotate(-3deg) ;
-//   // -o-transform: rotate(-3deg) ;
-//   // }
-  
-//   .men-section {
-//   margin-top: 0; /* Remove margin-top */
-//   }
-  
-//   .men {
-//   width: 100%; 
-//   max-width: 400px; 
-//   height: auto;
-//   transform: rotate(-0deg);
-//   }
-  
-//   //  For screens smaller than 768px (tablets and mobile phones) /
-//   // @media (max-width: 767px) {
-//   // .men-content {
-//   // flex-direction: column; 
-//   // align-items: center; 
-//   //   }
-//   // }
-  
-//   .side {
-//   margin-top: 20px; /* Reduce margin-top for better spacing */
-//   }
-  
-//   .men-section {
-//   margin-top: 20px; /* Reduce margin-top for better spacing */
-//   }
 
 
 /* Global styles to remove extra space and prevent overflow */
@@ -999,50 +648,141 @@ html, body {
   margin-bottom: 5px;
   }
   
-  // @media (max-width: 768px) {
-  // .Tokenomics-card h2 {
-  // font-size: 1.2em;
+  // .donut-chart-container {
+  // width: 50%;
+  // height: 400px;
+  // margin: auto;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
+  // justify-content: center;
+  // position: relative;
+  // margin-top: 100px;
   // }
   
-  // .Tokenomics-card p, .Tokenomics-card ul {
-  // font-size: 0.9em;
-  // }
-  // }
-  
-  .donut-chart-container {
-  width: 50%;
-  height: 400px;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  margin-top: 100px;
-  }
-  
-  .donut-chart-container canvas {
-  width: 100% !important;
-  height: 100% !important;
-  }
-  
-  // @media (max-width: 800px) {
   // .donut-chart-container canvas {
-  // margin-top: -100px;
+  // width: 100% !important;
+  // height: 100% !important;
   // }
-  // }
-  
-  .donut-chart-container h3 {
-  background: linear-gradient(135deg, #E0A872 0%, #F8E4BE 44%, #FFF3E0 55%, #E0A872 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  position: relative;
-  font-weight: bold;
-  margin-bottom: 0
-  }
   
 
   
+  // .donut-chart-container h3 {
+  // background: linear-gradient(135deg, #E0A872 0%, #F8E4BE 44%, #FFF3E0 55%, #E0A872 100%);
+  // -webkit-background-clip: text;
+  // -webkit-text-fill-color: transparent;
+  // position: relative;
+  // font-weight: bold;
+  // margin-bottom: 0
+  // }
+  
+
+  .donut-chart-container {
+    width: 50%;
+    height: 400px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-top: 100px;
+  }
+  
+  .donut-chart-container canvas {
+    width: 100% !important;
+    height: auto !important;
+  }
+  
+  .donut-chart-container h3 {
+    background: linear-gradient(135deg, #E0A872 0%, #F8E4BE 44%, #FFF3E0 55%, #E0A872 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+
+  @media (max-width: "480px") {
+    .donut-chart-container h3 {
+      margin-bottom: -80px;
+      margin-top: -80px;     
+    }    
+    .donut-chart-container {
+      width: 100%;
+    }
+  }
+ 
+
+
+
+
+
+
+
+  .roadmap-container {
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.roadmap-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.roadmap-card {
+  margin-bottom: 10px;
+}
+
+.roadmap-card .card-header {
+  background-color: #343a40;
+  color: #fff;
+}
+
+.roadmap-card .card-header .btn-link {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.roadmap-card .card-body ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.roadmap-card .card-body ul li {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.roadmap-card .card-body ul li::before {
+  content: '•';
+  color: #343a40;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+
+  
+  
+
+
+
+
+
+
+
+
+
   .video-gallery {
     text-align: center;
     padding: 20px;
@@ -1238,13 +978,14 @@ html, body {
   }
   
   .footer ul li a {
-  color: white;
+  color: #E0A872;
   text-decoration: none;
+  
   }
   
-  .footer ul li a
+  .footer ul li a:hover
   {
-  color: #E0A872;
+  color: white;
   }
   
   .footer .social-icons {
@@ -1289,7 +1030,3 @@ html, body {
   .footer .text-center {
   color: #4B4B4B;
   }
-
-
-  // Media Queries:
-

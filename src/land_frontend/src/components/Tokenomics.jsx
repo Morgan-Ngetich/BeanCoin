@@ -86,6 +86,7 @@ const TokenomicsCarousel = () => {
       </Carousel>
 
       < DonutChart />
+      
     </div>
   );
 };
