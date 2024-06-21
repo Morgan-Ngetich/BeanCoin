@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'
 import { Container, Row, Col, Button, Modal } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import hero from '../assets/hero.png';
 import cup from '../assets/cup.png';
 import bean from '../assets/bean.png';
 import { AuthClient } from '@dfinity/auth-client';
-// import BeanCoin from './BeanCoin'; // Make sure this path is correct
+
+
+import About from './About';
+import VideoGallery from './VideoGallery';
+import Map from './Map';
+import SocialLinks from './Socials';
 
 const LandingPage = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -25,6 +31,7 @@ const LandingPage = () => {
     };
 
     return (
+      <div>
         <Container fluid className="landing-page">
             <Row>
                 <Col>
@@ -32,7 +39,7 @@ const LandingPage = () => {
                     <div className="left-div">
                         <h1>Bean Coin</h1>
                         <p>Today's good mood is sponsored by BeanCoin. Find your perfect cup of coffee and join the BeanCoin revolution! <span className="coffee-cup">☕️</span></p>
-                        <button className="Button1" onClick={handleLogin}>Beanify</button> <button className="Button2">Wallet</button>
+                        <button className="Button1" onClick={handleLogin}>Beanify</button> <Link to="/wallet"> <button className="Button2">Wallet</button> </Link>
                     </div>
                 </Col>
                 <Col className="image-col">
@@ -51,6 +58,12 @@ const LandingPage = () => {
                 </Col>
             </Row>
         </Container>
+
+          <About />
+          <VideoGallery />
+          <Map />
+          <SocialLinks />
+      </div>
     );
 }
 

@@ -1,6 +1,7 @@
 // Header.js
 import React from 'react';
 import { Navbar, Nav, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../assets/logo.jpg';
 
@@ -22,7 +23,7 @@ const Header = () => {
           <Nav.Link href="#whitepaper">Whitepaper</Nav.Link>
           <Nav.Link href="#wallet">Wallet</Nav.Link>          
           <Nav.Link href="#contact">Contact</Nav.Link>
-          <Button variant="primary" className="wallet-btn">Wallet</Button>
+          <Link to='/wallet'><Button variant="primary" className="wallet-btn">Wallet</Button> </Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
