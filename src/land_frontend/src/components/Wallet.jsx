@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Container, Row, Col, Form, Button, ListGroup, Alert } from 'react-bootstrap';
 import { HttpAgent } from '@dfinity/agent';
 import { Principal } from '@dfinity/principal';
 import { idlFactory as walletIdl } from '/home/morganngetich/MEME/land/src/declarations/land_backend/land_backend.did.js';
 import QRCode from 'qrcode.react'; // Import QRCode library
+import PrincipalIdContext from '../contexts/PrincipalIdContext'; // Import the context
 
 const walletCanisterId = 'rdmx6-jaaaa-aaaaa-aaadq-cai'; // Replace with your actual canister ID
 const agent = new HttpAgent();
@@ -15,26 +16,26 @@ const createActor = (canisterId, agent) => {
 
 const Wallet = () => {
     const [balance, setBalance] = useState(0);
-    const [userPrincipalId, setUserPrincipalId] = useState('');
     const [receiverPrincipalId, setReceiverPrincipalId] = useState('');
     const [amount, setAmount] = useState(0);
     const [transactionHistory, setTransactionHistory] = useState([]);
     const [error, setError] = useState(null);
     const [qrCodeUserPrincipal, setQRCodeUserPrincipal] = useState(null);
     const [qrCodeReceiverPrincipal, setQRCodeReceiverPrincipal] = useState(null);
+    const { principalId } = useContext(PrincipalIdContext); // Access principalId from context
 
     useEffect(() => {
-        // Fetch balance and transaction history when userPrincipalId changes
-        if (userPrincipalId) {
+        // Fetch balance and transaction history when principalId changes
+        if (principalId) {
             fetchBalance();
             fetchTransactionHistory();
         }
-    }, [userPrincipalId]);
+    }, [principalId]);
 
     const fetchBalance = async () => {
         try {
             const wallet = createActor(walletCanisterId, agent);
-            const balance = await wallet.balance_of(Principal.fromText(userPrincipalId));
+            const balance = await wallet.balance_of(Principal.fromText(principalId));
             setBalance(balance);
         } catch (error) {
             setError('Failed to fetch balance. Please try again.');
@@ -54,8 +55,8 @@ const Wallet = () => {
     const handleSend = async () => {
         try {
             const wallet = createActor(walletCanisterId, agent);
-            const to = Principal.fromText(receiverPrincipalId); // Replace 'receiver_principal_here' with actual principal
-            await wallet.transfer(Principal.fromText(userPrincipalId), to, amount);
+            const to = Principal.fromText(receiverPrincipalId);
+            await wallet.transfer(Principal.fromText(principalId), to, amount);
             fetchBalance();
             fetchTransactionHistory();
         } catch (error) {
@@ -100,15 +101,14 @@ const Wallet = () => {
                             <div className="input-group">
                                 <Form.Control
                                     type="text"
-                                    value={userPrincipalId}
-                                    onChange={(e) => setUserPrincipalId(e.target.value)}
+                                    value={principalId}
                                     readOnly
                                 />
-                                <Button variant="outline-secondary" onClick={() => copyToClipboard(userPrincipalId)}>
+                                <Button variant="outline-secondary" onClick={() => copyToClipboard(principalId)}>
                                     Copy
                                 </Button>
                                 <div>
-                                    <Button variant="outline-secondary" onClick={() => setQRCodeUserPrincipal(handleGenerateQR(userPrincipalId))}>
+                                    <Button variant="outline-secondary" onClick={() => setQRCodeUserPrincipal(handleGenerateQR(principalId))}>
                                         Generate QR
                                     </Button>
                                 </div>

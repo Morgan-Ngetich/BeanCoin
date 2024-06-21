@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import LandingPage from './components/LandingPage';
 import Wallet from './components/Wallet';
+
 import Footer from './components/Footer';
 
 
@@ -13,7 +14,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/wallet/*" element={<Wallet />} />
+          <Route path="/wallet" element={<Wallet />} />
         </Routes>
         <Footer />
       </div>
