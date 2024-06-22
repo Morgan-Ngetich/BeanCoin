@@ -62,7 +62,7 @@ const phases = [
 const Map = () => {
   return (
     <Container>
-      <h2 className="text-center my-5">Project Timeline</h2>
+      <h2 className="text-center my-5 map-h2">Project Timeline</h2>
       <VerticalTimeline>
         {phases.map((phase, index) => (
           <VerticalTimelineElement

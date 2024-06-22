@@ -647,34 +647,7 @@ html, body {
   .Tokenomics-card ul li {
   margin-bottom: 5px;
   }
-  
-  // .donut-chart-container {
-  // width: 50%;
-  // height: 400px;
-  // margin: auto;
-  // display: flex;
-  // flex-direction: column;
-  // align-items: center;
-  // justify-content: center;
-  // position: relative;
-  // margin-top: 100px;
-  // }
-  
-  // .donut-chart-container canvas {
-  // width: 100% !important;
-  // height: 100% !important;
-  // }
-  
 
-  
-  // .donut-chart-container h3 {
-  // background: linear-gradient(135deg, #E0A872 0%, #F8E4BE 44%, #FFF3E0 55%, #E0A872 100%);
-  // -webkit-background-clip: text;
-  // -webkit-text-fill-color: transparent;
-  // position: relative;
-  // font-weight: bold;
-  // margin-bottom: 0
-  // }
   
 
   .donut-chart-container {
@@ -715,70 +688,6 @@ html, body {
     }
   }
  
-
-
-
-
-
-
-
-  .roadmap-container {
-  padding: 20px;
-  background-color: #f8f9fa;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  max-width: 800px;
-  margin: 20px auto;
-}
-
-.roadmap-title {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.roadmap-card {
-  margin-bottom: 10px;
-}
-
-.roadmap-card .card-header {
-  background-color: #343a40;
-  color: #fff;
-}
-
-.roadmap-card .card-header .btn-link {
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.roadmap-card .card-body ul {
-  list-style-type: none;
-  padding-left: 0;
-}
-
-.roadmap-card .card-body ul li {
-  margin-bottom: 10px;
-  font-size: 16px;
-}
-
-.roadmap-card .card-body ul li::before {
-  content: '•';
-  color: #343a40;
-  font-weight: bold;
-  display: inline-block;
-  width: 1em;
-  margin-left: -1em;
-}
-
-  
-  
-
-
-
-
-
 
 
 
@@ -881,6 +790,25 @@ html, body {
   }
 
 
+
+
+
+  .map-h2 {
+    background: linear-gradient(135deg, #E0A872 0%, #F8E4BE 44%, #FFF3E0 55%, #E0A872 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .vertical-timeline-element-title {
+    color: white;
+  }
+
+  
+  
   
 .social-links-container {
   background-color: #DFC39D;
@@ -1030,3 +958,218 @@ html, body {
   .footer .text-center {
   color: #4B4B4B;
   }
+
+
+
+
+
+
+
+/* Wallet.css */
+
+/* General styles for the wallet container */
+.wallet-container {
+  background: linear-gradient(145deg, #805a42, #4e342e);
+  color: white;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  max-width: 800px;
+  margin: 40px auto;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s;
+}
+
+.wallet-container:hover {
+  transform: scale(1.02);
+}
+
+.wallet-container::before,
+.wallet-container::after {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+  border-radius: 50%;
+  top: -100px;
+  left: -100px;
+  z-index: 0;
+  transition: all 0.3s;
+}
+
+.wallet-container::after {
+  top: auto;
+  bottom: -100px;
+  left: auto;
+  right: -100px;
+}
+
+.wallet-container h1 {
+  color: #F7E1BC;
+  text-align: center;
+  margin-bottom: 20px;
+  z-index: 1;
+  position: relative;
+  font-size: 2.5rem;
+  background: linear-gradient(to right, #DFC39D, #E0A872);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.form-group label {
+  color: #F7E1BC;
+  font-weight: bold;
+  z-index: 1;
+  position: relative;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group .form-control,
+.input-group .btn {
+  border-radius: 30px;
+  padding: 10px 15px;
+  z-index: 1;
+  position: relative;
+}
+
+.input-group .btn {
+  border: 1px solid #DFC39D;
+  background-color: #DFC39D;
+  color: #221518;
+  transition: background-color 0.3s, color 0.3s, transform 0.3s;
+}
+
+.input-group .btn:hover {
+  background-color: #E0A872;
+  color: #FFF3E0;
+  transform: scale(1.05);
+}
+
+.input-group .form-control {
+  background-color: #DFC39D;
+  color: #221518;
+  border: 1px solid #DFC39D;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.input-group .form-control:focus {
+  background-color: #E0A872;
+  color: #221518;
+  border-color: #E0A872;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.alert {
+  margin-top: 20px;
+  // background-color: #E0A872;
+  // color: #221518;/
+  border-radius: 10px;
+  padding: 10px;
+  animation: fadeOut 5s forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
+/* Transaction History Styles */
+.transaction-history {
+  background: linear-gradient(145deg, #DFC39D, #E0A872);
+  border-radius: 20px;
+  padding: 20px;
+  color: #221518;
+  margin-top: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.transaction-history h2 {
+  color: #805a42;
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.list-group-item {
+  background-color: #DFC39D;
+  color: #221518;
+  border: 1px solid #E0A872;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  transition: transform 0.3s;
+}
+
+.list-group-item:hover {
+  background-color: #E0A872;
+  color: #221518;
+  transform: scale(1.05);
+}
+
+/* Modal Styles */
+.modal-content {
+  background-color: #4e342e;
+  color: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+  border-bottom: none;
+  padding: 20px 30px;
+  background-color: #5d4037;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.modal-title {
+  color: #FFFFFF;
+}
+
+.modal-body {
+  padding: 30px;
+  text-align: center;
+}
+
+.modal-footer {
+  border-top: none;
+  padding: 20px 30px;
+  background-color: #5d4037;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.modal-footer .btn {
+  border-radius: 30px;
+  padding: 10px 20px;
+  font-weight: bold;
+  transition: transform 0.3s;
+}
+
+.modal-footer .btn-primary {
+  background-color: #DFC39D;
+  border-color: #DFC39D;
+  color: #221518;
+}
+
+.modal-footer .btn-primary:hover {
+  background-color: #E0A872;
+  border-color: #E0A872;
+  color: #FFF3E0;
+  transform: scale(1.05);
+}

@@ -6,7 +6,7 @@ import hero from '../assets/hero.png';
 import cup from '../assets/cup.png';
 import bean from '../assets/bean.png';
 import { AuthClient } from '@dfinity/auth-client';
-import PrincipalIdContext from '../contexts/PrincipalIdContext'; // Import the context
+import PrincipalIdContext from './PrincipalIdContext'; // Import the context
 
 import About from './About';
 import VideoGallery from './VideoGallery';

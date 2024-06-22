@@ -1,18 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Container, Row, Col, Form, Button, ListGroup, Alert } from 'react-bootstrap';
+import React, { useEffect, useState, useContext } from 'react';
+import { Container, Row, Col, Form, Button, ListGroup, Modal, Alert } from 'react-bootstrap';
 import { HttpAgent } from '@dfinity/agent';
 import { Principal } from '@dfinity/principal';
 import { idlFactory as walletIdl } from '/home/morganngetich/MEME/land/src/declarations/land_backend/land_backend.did.js';
-import QRCode from 'qrcode.react'; // Import QRCode library
-import PrincipalIdContext from '../contexts/PrincipalIdContext'; // Import the context
-
-const walletCanisterId = 'rdmx6-jaaaa-aaaaa-aaadq-cai'; // Replace with your actual canister ID
-const agent = new HttpAgent();
-
-const createActor = (canisterId, agent) => {
-    const actorInterface = walletIdl({ IDL });
-    return actorInterface.createActor(agent, { canisterId });
-};
+import QRCode from 'qrcode.react';
+import PrincipalIdContext from './PrincipalIdContext';
 
 const Wallet = () => {
     const [balance, setBalance] = useState(0);
@@ -20,17 +12,49 @@ const Wallet = () => {
     const [amount, setAmount] = useState(0);
     const [transactionHistory, setTransactionHistory] = useState([]);
     const [error, setError] = useState(null);
-    const [qrCodeUserPrincipal, setQRCodeUserPrincipal] = useState(null);
-    const [qrCodeReceiverPrincipal, setQRCodeReceiverPrincipal] = useState(null);
-    const { principalId } = useContext(PrincipalIdContext); // Access principalId from context
+    const [alertMessage, setAlertMessage] = useState('');
+    const [alertVariant, setAlertVariant] = useState('success'); // success, danger, etc.
+    const [showAlert, setShowAlert] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const [qrCodeContent, setQRCodeContent] = useState('');
+    const [isPrincipalIdPresent, setIsPrincipalIdPresent] = useState(false); // Track if principalId is present
+    const { principalId, setPrincipalId } = useContext(PrincipalIdContext);
+
+    const walletCanisterId = 'rdmx6-jaaaa-aaaaa-aaadq-cai'; // Replace with your actual canister ID
+    const agent = new HttpAgent();
 
     useEffect(() => {
-        // Fetch balance and transaction history when principalId changes
+        setIsPrincipalIdPresent(principalId !== ''); // Check if principalId is set initially
+    }, [principalId]);
+
+    useEffect(() => {
         if (principalId) {
             fetchBalance();
             fetchTransactionHistory();
         }
     }, [principalId]);
+
+    useEffect(() => {
+        if (error) {
+            showAlertMessage('Failed to fetch balance. Please try again.', 'danger');
+        }
+    }, [error]);
+
+    useEffect(() => {
+        if (alertMessage) {
+            setShowAlert(true);
+            const timer = setTimeout(() => {
+                setShowAlert(false);
+                setAlertMessage('');
+            }, 3000);
+            return () => clearTimeout(timer);
+        }
+    }, [alertMessage]);
+
+    const createActor = (canisterId, agent) => {
+        const actorInterface = walletIdl({ IDL });
+        return actorInterface.createActor(agent, { canisterId });
+    };
 
     const fetchBalance = async () => {
         try {
@@ -57,6 +81,7 @@ const Wallet = () => {
             const wallet = createActor(walletCanisterId, agent);
             const to = Principal.fromText(receiverPrincipalId);
             await wallet.transfer(Principal.fromText(principalId), to, amount);
+            showAlertMessage('Transaction successful!', 'success');
             fetchBalance();
             fetchTransactionHistory();
         } catch (error) {
@@ -65,34 +90,74 @@ const Wallet = () => {
     };
 
     const copyToClipboard = async (text) => {
-        try {
-            await navigator.clipboard.writeText(text);
-            alert(`${text} copied to clipboard!`);
-        } catch (error) {
-            console.error('Failed to copy:', error);
+        if (text) {
+            try {
+                await navigator.clipboard.writeText(text);
+                showAlertMessage(`${text} copied to clipboard!`, 'success');
+            } catch (error) {
+                console.error('Failed to copy:', error);
+                showAlertMessage('Failed to copy to clipboard. Please try again.', 'danger');
+            }
+        } else {
+            // Show modal if principalId is not present
+            showPrincipalIdPrompt();
         }
     };
 
-    const handleGenerateQR = (principalId) => {
-        // This function generates a QR code for the provided principalId
-        return (
-            <QRCode
-                value={principalId}
-                size={128}
-                bgColor="#FFFFFF"
-                fgColor="#000000"
-                level="L"
-                includeMargin={true}
-                renderAs="svg"
-                style={{ margin: 'auto' }}
-            />
-        );
+    const handleShowQRModal = () => {
+        if (isPrincipalIdPresent) {
+            setQRCodeContent(principalId); // Set QR code content to principalId
+            setShowModal(true); // Open the modal
+        } else {
+            showPrincipalIdPrompt();
+        }
+    };
+
+    const handleCloseQRModal = () => {
+        setShowModal(false); // Close the modal
+    };
+
+    const showPrincipalIdPrompt = () => {
+        // Show modal prompting to log in with Internet Identity
+        setShowModal(true);
+    };
+
+    const handleLoginWithInternetIdentity = async () => {
+        const authClient = await AuthClient.create();
+        try {
+            await authClient.login({
+                onSuccess: () => {
+                    const principalId = authClient.getIdentity().getPrincipal().toString();
+                    setPrincipalId(principalId); // Set principalId in the context
+                    setIsPrincipalIdPresent(true); // Now set to true after login
+                    setShowModal(false); // Close the modal after successful login
+                    showAlertMessage('Logged in successfully!', 'success');
+                },
+                onError: (error) => {
+                    console.error('Failed to authenticate:', error);
+                    setError('Failed to authenticate. Please try again.');
+                }
+            });
+        } catch (error) {
+            console.error('Error during login:', error);
+            setError('Failed to authenticate. Please try again.');
+        }
+    };
+
+    const showAlertMessage = (message, variant) => {
+        setAlertMessage(message);
+        setAlertVariant(variant);
+        setShowAlert(true);
+        setTimeout(() => {
+            setShowAlert(false);
+            setAlertMessage('');
+        }, 3000);
     };
 
     return (
-        <Container>
+        <Container className="wallet-container">
             <h1 className="text-center my-4">My Crypto Wallet</h1>
-            {error && <Alert variant="danger">{error}</Alert>}
+            {showAlert && <Alert variant={alertVariant} className="alert">{alertMessage}</Alert>}
             <Row>
                 <Col>
                     <Form>
@@ -101,43 +166,22 @@ const Wallet = () => {
                             <div className="input-group">
                                 <Form.Control
                                     type="text"
-                                    value={principalId}
+                                    value={principalId || ''}
                                     readOnly
                                 />
                                 <Button variant="outline-secondary" onClick={() => copyToClipboard(principalId)}>
                                     Copy
                                 </Button>
-                                <div>
-                                    <Button variant="outline-secondary" onClick={() => setQRCodeUserPrincipal(handleGenerateQR(principalId))}>
-                                        Generate QR
-                                    </Button>
-                                </div>
-                            </div>
-                            <div className="text-center">
-                                {qrCodeUserPrincipal}
                             </div>
                         </Form.Group>
                         <Form.Group controlId="formReceiverPrincipalId">
                             <Form.Label>Receiver Principal ID</Form.Label>
-                            <div className="input-group">
-                                <Form.Control
-                                    type="text"
-                                    value={receiverPrincipalId}
-                                    onChange={(e) => setReceiverPrincipalId(e.target.value)}
-                                    placeholder="Enter receiver's principal ID"
-                                />
-                                <Button variant="outline-secondary" onClick={() => copyToClipboard(receiverPrincipalId)}>
-                                    Copy
-                                </Button>
-                                <div>
-                                    <Button variant="outline-secondary" onClick={() => setQRCodeReceiverPrincipal(handleGenerateQR(receiverPrincipalId))}>
-                                        Generate QR
-                                    </Button>
-                                </div>
-                            </div>
-                            <div className="text-center">
-                                {qrCodeReceiverPrincipal}
-                            </div>
+                            <Form.Control
+                                type="text"
+                                value={receiverPrincipalId}
+                                onChange={(e) => setReceiverPrincipalId(e.target.value)}
+                                placeholder="Enter receiver's principal ID"
+                            />
                         </Form.Group>
                         <Form.Group controlId="formAmount">
                             <Form.Label>Amount</Form.Label>
@@ -148,25 +192,62 @@ const Wallet = () => {
                                 placeholder="Enter amount"
                             />
                         </Form.Group>
-                        <Button variant="primary" onClick={handleSend}>Send</Button>
+                        <Button
+                            variant="primary"
+                            onClick={handleSend}
+                            disabled={!isPrincipalIdPresent} // Disable send button if principalId is not present
+                            className="my-button"
+                            style={{backgroundColor: 'green', marginTop:"10px", border:"0", width:"100px"}}
+                        >
+                            Send
+                        </Button>
+                        <div className="mt-3">
+                            <Button
+                                variant="outline-secondary"
+                                onClick={handleShowQRModal}
+                                disabled={!isPrincipalIdPresent} // Disable QR code button if principalId is not present
+                                className="my-button"
+                            >
+                                Generate QR Code P_ID
+                            </Button>
+                        </div>
                     </Form>
                 </Col>
                 <Col>
                     <ListGroup>
-                        <ListGroup.Item>Balance: {balance}</ListGroup.Item>
+                        <ListGroup.Item className="my-list-item">Balance: {balance}</ListGroup.Item>
                     </ListGroup>
                 </Col>
             </Row>
             <Row>
                 <Col>
                     <h2 className="my-4">Transaction History</h2>
-                    <ListGroup>
+                    <ListGroup className="my-list-group">
                         {transactionHistory.map((transaction, index) => (
-                            <ListGroup.Item key={index}>{transaction}</ListGroup.Item>
+                            <ListGroup.Item key={index} className="my-list-item">{transaction}</ListGroup.Item>
                         ))}
                     </ListGroup>
                 </Col>
             </Row>
+
+            {/* QR Code Modal */}
+            <Modal show={showModal} onHide={handleCloseQRModal} backdrop="static" keyboard={false} className="my-modal">
+                <Modal.Header closeButton>
+                    <Modal.Title>Principal ID Required</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>Your Principal ID is not available.</p>
+                    <p>Would you like to log in using Internet Identity to obtain your Principal ID?</p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseQRModal} className="my-button">
+                        Cancel
+                    </Button>
+                    <Button variant="primary" onClick={handleLoginWithInternetIdentity} className="my-button">
+                        Login with Internet Identity
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </Container>
     );
 };
