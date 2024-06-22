@@ -21,8 +21,6 @@ const Header = () => {
           <Nav.Link href="#home">Home</Nav.Link>
           <Nav.Link href="#tokenomics">Tokenomics</Nav.Link>
           <Nav.Link href="#whitepaper">Whitepaper</Nav.Link>
-          <Nav.Link href="#wallet">Wallet</Nav.Link>          
-          <Nav.Link href="#contact">Contact</Nav.Link>
           <Link to='/wallet'><Button variant="primary" className="wallet-btn">Wallet</Button> </Link>
         </Nav>
       </Navbar.Collapse>

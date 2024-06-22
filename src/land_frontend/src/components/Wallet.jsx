@@ -243,7 +243,7 @@ const Wallet = () => {
                     <Button variant="secondary" onClick={handleCloseQRModal} className="my-button">
                         Cancel
                     </Button>
-                    <Button variant="primary" onClick={handleLoginWithInternetIdentity} className="my-button">
+                    <Button variant="primary" onClick={handleLoginWithInternetIdentity} className="my-button wallet-login" style={{maxWidth: "300px"}}>
                         Login with Internet Identity
                     </Button>
                 </Modal.Footer>

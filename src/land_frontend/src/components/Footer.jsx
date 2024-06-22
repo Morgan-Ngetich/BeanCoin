@@ -1,9 +1,8 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom'
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import machine from "../assets/machine.png";
 import footer from "../assets/footer.png";
-// import './Footer.css'; // Import the CSS file
 import { FaTelegram, FaTwitter, FaComments } from 'react-icons/fa';
 
 const Footer = () => {
@@ -28,9 +27,8 @@ const Footer = () => {
                 <ul className="list-unstyled">
                   <li><a href="#home">Home</a></li>
                   <li><a href="#tokenomics">Tokenomics</a></li>
-                  <li><a href="#whitepaper">Whitepaper</a></li>                  
-                  <li><a href="#contact">Contact</a></li>
-                  <li><a href="#Wallet">Wallet</a></li>
+                  <li><a href="#whitepaper">Whitepaper</a></li>        
+                  <li><Link to="/wallet"><Button className="wallet-btn"><a>Wallet</a></Button></Link></li>
                 </ul>
               </Col>
               <Col md={4}>
