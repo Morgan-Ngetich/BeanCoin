@@ -1,20 +1,19 @@
-use ic_cdk::api::caller;
-use ic_cdk_macros::{update, query};
-use ic_principal::Principal;
-use std::collections::{HashMap, VecDeque};
-use candid::{CandidType, Deserialize};
+use ic_cdk::api;
+use candid::{CandidType, Deserialize, Principal};
+use ic_cdk_macros::{query, update};
 use serde::Serialize;
+use std::collections::{HashMap, VecDeque};
 
 type Balance = u64;
 
-#[derive(CandidType, Deserialize, Serialize)]
+#[derive(CandidType, Deserialize, Serialize, Clone)]
 struct Transaction {
     from: Principal,
     to: Principal,
     amount: Balance,
     timestamp: u64,
 }
-
+#[allow(dead_code)]
 struct BeanCoin {
     owner: Principal,
     balances: HashMap<Principal, Balance>,
@@ -24,15 +23,19 @@ struct BeanCoin {
 impl BeanCoin {
     pub fn new(owner: Principal) -> Self {
         let mut balances = HashMap::new();
-        balances.insert(owner, 1_000_000_000); // Initial mint to owner
-        Self { owner, balances, ledger: VecDeque::new() }
+        balances.insert(owner.clone(), 1_000_000_000); // Initial mint to owner
+        Self {
+            owner,
+            balances,
+            ledger: VecDeque::new(),
+        }
     }
 
     pub fn transfer(&mut self, from: Principal, to: Principal, amount: Balance) -> Result<(), String> {
         if let Some(from_balance) = self.balances.get_mut(&from) {
             if *from_balance >= amount {
                 *from_balance -= amount;
-                let to_balance = self.balances.entry(to).or_insert(0);
+                let to_balance = self.balances.entry(to.clone()).or_insert(0);
                 *to_balance += amount;
                 self.record_transaction(from, to, amount);
                 return Ok(());
@@ -54,7 +57,7 @@ impl BeanCoin {
             from,
             to,
             amount,
-            timestamp: ic_cdk::api::time(),
+            timestamp: api::time(),
         };
         self.ledger.push_back(transaction);
     }
@@ -76,5 +79,5 @@ fn get_ledger() -> Vec<Transaction> {
 }
 
 thread_local! {
-    static STATE: std::cell::RefCell<BeanCoin> = std::cell::RefCell::new(BeanCoin::new(caller()));
+    static STATE: std::cell::RefCell<BeanCoin> = std::cell::RefCell::new(BeanCoin::new(api::caller()));
 }

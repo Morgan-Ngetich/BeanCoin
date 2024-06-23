@@ -1,8 +1,17 @@
+type Balance = nat;
+type Principal = principal;
+
+type Transaction = record {
+    from: Principal;
+    to: Principal;
+    amount: Balance;
+    timestamp: nat;
+};
+
+type Result = variant { Ok: text; Err: text };
+
 service : {
-    
-    "transfer": (from: principal, to: principal, amount: nat) -> (unit) query;
-   
-    "balance_of": (owner: principal) -> (nat) query;
-    
-    "get_ledger": () -> (vec { "from": principal, "to": principal, "amount": nat, "timestamp": nat }) query;
+    "transfer": (from: Principal, to: Principal, amount: Balance) -> (Result);
+    "balance_of": (owner: Principal) -> (Balance) query;
+    "get_ledger": () -> (vec Transaction) query;
 }

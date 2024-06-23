@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Container, Row, Col, Form, Button, ListGroup, Modal, Alert } from 'react-bootstrap';
 import { HttpAgent } from '@dfinity/agent';
 import { Principal } from '@dfinity/principal';
+import { AuthClient } from '@dfinity/auth-client';
 import { idlFactory as walletIdl } from '/home/morganngetich/MEME/land/src/declarations/land_backend/land_backend.did.js';
 import QRCode from 'qrcode.react';
 import PrincipalIdContext from './PrincipalIdContext';
